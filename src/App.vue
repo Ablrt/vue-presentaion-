@@ -1,26 +1,44 @@
+// html
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <StudentsList
+    v-bind:students="students"
+    @not-student="correctRole"/>
+  </div>
 </template>
 
+//js (optinal)
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import StudentsList from './components/StudentsList.vue'
 
 export default {
   name: 'App',
+  data(){
+    return {
+      students:[{name:'Saro', dep:'CS', isStudent:true},
+                {name:'Maro', dep:'BS', isStudent:true},
+                {name:'Taro', dep:'EC', isStudent:true},
+                {name:'Karo', dep:'DS', isStudent:true},
+                {name:'Aro', dep:'Hufflepuff', isStudent:true},
+                {name:'Maro 2', dep:'CS', isStudent:true}]
+    }
+  },
+  methods:{
+    correctRole(n){
+      let a = this.students.find(s=>{
+        return s.name === n
+      }) 
+    a.isStudent = false
+    }
+    
+  },
   components: {
-    HelloWorld
+    StudentsList
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+//css (optinal)
+<style scoped>
+
 </style>
